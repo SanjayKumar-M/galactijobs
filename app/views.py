@@ -44,3 +44,25 @@ def RegisterUser(req):
             newUser = Users.objects.create(role=role,otp=otp,password=password)
             newCompany = Company.objects.create(user_id=newUser,company_name = company_name)
             return render(req,"app/otp.html")
+        
+        
+def OTP(req):
+    return render(req,"app/otp.html")
+
+def verifyOTP(req):
+    if req.method == 'POST':
+        email = req.POST.get('email')
+        otp = req.POST.get('otp')
+        user = Users.objects.get(email=email)
+        if user:
+            if user.otp == otp:
+                return render(req, "app/login.html", {'msg': "OTP verified successfully"})
+            else:
+                return render(req, "app/otp.html", {'msg': "Incorrect OTP"})
+        else:
+            return render(req, "app/signup.html")
+    else:
+        return render(req, "app/otp.html")
+    
+def login(req):
+    return render(req,"app/login.html")
