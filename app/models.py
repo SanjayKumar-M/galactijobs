@@ -13,7 +13,7 @@ class Users(models.Model):
 class Candidate(models.Model):
     user_id = models.ForeignKey(Users,on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
-    conact = models.CharField(max_length=50)
+    contact = models.CharField(max_length=50)
     state = models.CharField(max_length=50)
     city = models.CharField(max_length=50)
     address = models.CharField(max_length=150)
