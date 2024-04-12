@@ -1,4 +1,5 @@
 from django.shortcuts import render
 
-def sample(request):
-    return render(request, "app/sample.html")
+
+def Indexpage(req):
+    return render (req, "app/index.html")
