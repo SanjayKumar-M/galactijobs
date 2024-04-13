@@ -87,5 +87,27 @@ def loginUser(req):
                     return render(req, "app/login.html", {'msg': "Wrong Password"})
             except Users.DoesNotExist:
                 return render(req, "app/login.html", {'msg': "User does not exist"})
-        # Add similar logic for the 'Company' role
+        else:
+            email = req.POST['email']
+            password = req.POST['password']
+            try:
+                company = Users.objects.get(email=email)
+                if company.password == password and company.role == "Company":
+                    comp = Company.objects.get(user_id=company)
+                    
+                    req.session['id'] = company.id
+                    req.session['role'] = company.role
+                    req.session['name'] = comp.name
+                    
+                    return redirect('index')
+                else:
+                      return render(req, "app/login.html", {'msg': "Wrong Password"})
+            except Users.DoesNotExist:
+                return render(req, "app/login.html", {'msg': "User does not exist"})
+                    
     return render(req, "app/login.html")  
+
+def profile(req,pk):
+    user = Users.objects.get(pk=pk)
+    candidate = Candidate.objects.get(user_id = user)
+    return render(req,"app/profile.html",{'user':user,'candidate':candidate})
