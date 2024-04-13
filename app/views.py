@@ -1,6 +1,7 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from random import randint
 from .models import *
+
 
 def Indexpage(req):
     return render(req, "app/index.html")
@@ -107,7 +108,31 @@ def loginUser(req):
                     
     return render(req, "app/login.html")  
 
-def profile(req,pk):
+def profile(request, pk):
     user = Users.objects.get(pk=pk)
-    candidate = Candidate.objects.get(user_id = user)
-    return render(req,"app/profile.html",{'user':user,'candidate':candidate})
+    candidate = Candidate.objects.get(user_id=user)
+    return render(request, "app/profile.html", {'user': user, 'candidate': candidate})
+
+def updateProfile(req, pk):
+    user = get_object_or_404(Users, pk=pk)
+    
+    if user.role == "Candidate":
+        can = Candidate.objects.get(user_id=user)
+        can.country = req.POST.get('country')
+        can.city = req.POST.get('city')
+        can.state = req.POST.get('state')
+        can.dob = req.POST.get('dob')
+        can.address = req.POST.get('address')
+        can.gender = req.POST.get('gender')
+        can.jobtype = req.POST.get('jobtype')
+        can.jobcategory = req.POST.get('jobcategory')
+        can.max_salary = req.POST.get('max_salary')
+        can.min_salary = req.POST.get('min_salary')
+        can.contact = req.POST.get('contact')
+        can.highest_education = req.POST.get('highest_education')
+        can.experience = req.POST.get('experience')
+        can.job_description = req.POST.get('job_description')
+        can.profile = req.POST.get('profile')
+        can.save()
+        return redirect('profile',pk=pk)
+    return redirect('profile', pk=pk)   

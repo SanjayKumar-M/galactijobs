@@ -7,6 +7,7 @@ urlpatterns = [
     path('register/', views.RegisterUser, name="register"),
     path('verify-otp/', views.verifyOTP, name="verify-otp"),
     path('login/', views.loginUser, name="login"),
-    path('profile/<int:pk>/',views.profile,name="profile")
+    path('profile/<int:pk>/',views.profile,name="profile"),
+    path('updateprofile/<int:pk>/',views.updateProfile,name="updateprofile")
     
 ]

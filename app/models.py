@@ -22,6 +22,15 @@ class Candidate(models.Model):
     address = models.CharField(max_length=150)
     dob = models.CharField(max_length=50)
     gender = models.CharField(max_length=50)
+    min_salary = models.BigIntegerField(default=0)
+    max_salary = models.BigIntegerField(default=0)
+    jobtype = models.CharField(max_length=50,default='unknown')
+    jobcategory = models.CharField(max_length=50,default='unknown')
+    country = models.CharField(max_length=50, default='India')
+
+    highest_education = models.CharField(max_length=50,default='unknown')
+    experience = models.CharField(max_length=50,default='0')
+    job_description = models.CharField(max_length=150,default='unknown')
     profile = models.ImageField(upload_to="app/img/candidates")
     def __str__(self):
         return self.name

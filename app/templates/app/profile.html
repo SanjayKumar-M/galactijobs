@@ -31,8 +31,25 @@
         }
 
         /* Form Styles */
-        .form-group {
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
             margin-bottom: 20px;
+            
+        }
+
+        .form-group {
+            flex-basis: 48%;
+        }
+
+        /* Optional: Adjust the width of inputs */
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select,
+        textarea {
+            width: calc(100% - 10px);
         }
 
         .form-group label {
@@ -81,49 +98,94 @@
     <div class="container">
         <div class="card">
             <h2>Candidate Profile</h2>
-            <form method="post" action="{% url 'profile' pk=candidate.pk %}" enctype="multipart/form-data">
+            <form method="post" action="{% url 'updateprofile' pk=candidate.user_id.pk %}" enctype="multipart/form-data">
 
                 {% csrf_token %}
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" value="{{ candidate.name }}" required>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" value="{{ candidate.name }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" value="{{ user.email }}" required>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="name">Email</label>
-                    <input type="email" id="name" name="name" value="{{ user.email }}" required>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="contact">Contact</label>
+                        <input type="tel" id="contact" name="contact" value="{{candidate.contact}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="state">State</label>
+                        <input type="text" id="state" name="state" value="{{candidate.state}}" required>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="contact">Contact</label>
-                    <input type="tel" id="contact" name="contact" value="" required>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" id="city" name="city" value="{{candidate.city}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <input id="address" name="address" value="{{candidate.address}}" required />
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="state">State</label>
-                    <input type="text" id="state" name="state" value="" required>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="dob">Date of Birth</label>
+                        <input type="text" id="dob" name="dob" value="{{candidate.dob}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <input type="text" id="gender" name="gender" value="{{candidate.gender}}" required>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="city">City</label>
-                    <input type="text" id="city" name="city" value="" required>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="min_salary">Minimum Salary</label>
+                        <input type="number" id="min_salary" name="min_salary" value="{{candidate.min_salary}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="max_salary">Maximum Salary</label>
+                        <input type="number" id="max_salary" name="max_salary" value="{{candidate.max_salary}}" required>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="address">Address</label>
-                    <textarea id="address" name="address" required></textarea>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="jobtype">Job Type</label>
+                        <input type="text" id="jobtype" name="jobtype" value="{{candidate.jobtype}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="jobcategory">Job Category</label>
+                        <input type="text" id="jobcategory" name="jobcategory" value="{{candidate.jobcategory}}" required>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="dob">Date of Birth</label>
-                    <input type="text" id="dob" name="dob" value="" required>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="country">Country</label>
+                        <input type="text" id="country" name="country" value="{{candidate.country}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="highest_education">Highest Education</label>
+                        <input type="text" id="highest_education" name="highest_education" value="{{candidate.highest_education}}" required>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="gender">Gender</label>
-                    <select id="gender" name="gender" required>
-                        <option value="select"></option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Other">Other</option>
-                    </select>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="experience">Experience</label>
+                        <input type="text" id="experience" name="experience" value="{{candidate.experience}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="job_description">Job Description</label>
+                        <input id="job_description" name="job_description" value="{{candidate.job_description}}" required />
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="profile">Profile Picture</label>
-                    <input type="file" id="profile" name="profile">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="profile">Profile Picture</label>
+                        <input type="file" id="profile" name="profile" value="{{candidate.profile}}">
+                    </div>
                 </div>
                 <button type="submit" class="btn">Update Profile</button>
             </form>
