@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from random import randint
 from .models import *
 
@@ -27,7 +27,7 @@ def RegisterUser(req):
             newUser = Users.objects.create(role=role, otp=otp, email=email, password=password)
             newCandidate = Candidate.objects.create(user_id=newUser, name=name)
 
-            return render(req, "app/otp.html")
+            return render(req, "app/otp.html",{'email':email})
     else:
         company_name = req.POST['name']
         contact = req.POST['contact']
@@ -43,26 +43,25 @@ def RegisterUser(req):
             
             newUser = Users.objects.create(role=role,otp=otp,password=password)
             newCompany = Company.objects.create(user_id=newUser,company_name = company_name)
-            return render(req,"app/otp.html")
+            return render(req,"app/otp.html",{'email':email})
         
         
 def OTP(req):
     return render(req,"app/otp.html")
 
 def verifyOTP(req):
-    if req.method == 'POST':
-        email = req.POST.get('email')
-        otp = req.POST.get('otp')
-        user = Users.objects.get(email=email)
-        if user:
-            if user.otp == otp:
-                return render(req, "app/login.html", {'msg': "OTP verified successfully"})
-            else:
-                return render(req, "app/otp.html", {'msg': "Incorrect OTP"})
+    email = req.POST['email']
+    otp = req.POST['otp']
+    user = Users.objects.get(email=email)
+    
+    if user:
+        if user.otp == otp:
+            return render(req,"app/login.html",{'msg':"OTP Verification Success"})
         else:
-            return render(req, "app/signup.html")
+            return render(req,"app/otp.html",{'msg':"OTP Verification Failed"})
     else:
-        return render(req, "app/otp.html")
+        return render(req,"app/signup.html",{'msg':"User not registered"})
+   
     
 def login(req):
     return render(req,"app/login.html")

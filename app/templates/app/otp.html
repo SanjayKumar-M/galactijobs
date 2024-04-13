@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Galaticjobs - Signup</title>
     <style>
-        /* Global styles */
+       
         body {
             font-family: Arial, sans-serif;
             background-color: #f2f2f2;
@@ -14,7 +14,7 @@
             padding: 0;
         }
 
-        /* Container styles */
+
         .container {
             display: flex;
             justify-content: center;
@@ -107,17 +107,17 @@
                 <h2>Verify your OTP</h2>
             </center>
 
-            <form method="post" action="{% url 'otp'%}" enctype="multipart/form-data">
+            <form method="post" action="{% url 'verify-otp'%}" enctype="multipart/form-data">
                 {% csrf_token %}
 
 
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required >
+                    <input type="email" id="email" name="email"  value="{{ email }}" required>
                 </div>
                 <div class="form-group">
                     <label for="address">OTP</label>
-                    <input type="text" id="address" name="password" required>
+                    <input type="text" id="otp" name="otp" required>
                 </div>
                 <button type="submit" class="btn">Verify</button>
             </form>
