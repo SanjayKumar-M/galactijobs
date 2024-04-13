@@ -6,5 +6,6 @@ urlpatterns = [
     path('signup/', views.Register, name="signup"),
     path('register/', views.RegisterUser, name="register"),
     path('verify-otp/', views.verifyOTP, name="verify-otp"),
-    path('login/', views.login, name="login"),
+    path('login/', views.loginUser, name="login"),
+    
 ]

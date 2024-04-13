@@ -65,3 +65,27 @@ def verifyOTP(req):
     
 def login(req):
     return render(req,"app/login.html")
+
+from django.shortcuts import render, redirect
+
+def loginUser(req):
+    if req.method == 'POST':
+        role = req.POST['role']
+        if role == 'Candidate':
+            email = req.POST['email']
+            password = req.POST['password']
+            try:
+                user = Users.objects.get(email=email)
+                if user.password == password and user.role == "Candidate":
+                    candidate = Candidate.objects.get(user_id=user)
+                    req.session['id'] = user.id
+                    req.session['role'] = user.role
+                    req.session['name'] = candidate.name
+                    
+                    return redirect('index')  # Redirect to the index page
+                else:
+                    return render(req, "app/login.html", {'msg': "Wrong Password"})
+            except Users.DoesNotExist:
+                return render(req, "app/login.html", {'msg': "User does not exist"})
+        # Add similar logic for the 'Company' role
+    return render(req, "app/login.html")  
