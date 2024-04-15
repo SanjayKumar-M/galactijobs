@@ -160,3 +160,46 @@ def updateCompanyProfile(req,pk):
             company.logo = req.POST.get('logo')
             company.save()
             return redirect('company-profile', pk=pk)   
+        
+def jobpost(req):
+    return render(req,"app/company/jobpost.html")
+
+def jobDetailsPost(req):
+    if 'id' in req.session:  # Checking if 'id' is in the session data
+        user_id = req.session['id']  # Accessing the user ID from the session
+        user = Users.objects.get(id=user_id)  # Fetching the user object
+        if user.role == "Company":
+            company = Company.objects.get(user_id=user)
+            jobname = req.POST['jobname']
+            companyname = req.POST['companyname']
+            companyaddress = req.POST['companyaddress']
+            jobdescription = req.POST['jobdescription']
+            qualification = req.POST['qualification']
+            responsibility = req.POST['responsibility']
+            location = req.POST['location']
+            companywebsite = req.POST['companywebsite']
+            companyemail = req.POST['companyemail']
+            companycontact = req.POST['companycontact']
+            salary = req.POST['salary']
+            experience = req.POST['experience']
+            logo = req.FILES['logo']
+            
+            job = JobDetail.objects.create(
+                company_id=company,
+                jobname=jobname,
+                companyname=companyname,
+                companyaddress=companyaddress,
+                jobdescription=jobdescription,
+                qualification=qualification,
+                responsibility=responsibility,
+                location=location, 
+                companywebsite=companywebsite,
+                companyemail=companyemail,
+                companycontact=companycontact,
+                salary=salary,
+                experience=experience,
+                logo=logo
+            )
+            return render(req, "app/company/jobpost.html", {'msg': "Job posted successfully!"})
+    # Handle cases where session ID is not found or user role is not "Company"
+    return HttpResponse("Unauthorized", status=401)  # Or redirect to a login page

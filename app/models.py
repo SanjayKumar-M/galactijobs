@@ -50,3 +50,18 @@ class Company(models.Model):
         return self.name
     
     
+class JobDetail(models.Model):
+    company_id = models.ForeignKey(Company,on_delete=models.CASCADE)
+    jobname = models.CharField(max_length=250)
+    companyname = models.CharField(max_length=250)
+    companyaddress = models.CharField(max_length=250)
+    jobdescription = models.CharField(max_length=500)
+    qualification = models.CharField(max_length=250)
+    responsibility = models.CharField(max_length=250)
+    location = models.CharField(max_length=250)
+    companywebsite = models.CharField(max_length=250)
+    companyemail = models.CharField(max_length=20)
+    companycontact = models.CharField(max_length=20)
+    salary = models.CharField(max_length=200)
+    experience = models.IntegerField()
+    logo = models.ImageField(upload_to="app/img/companies/logo")
