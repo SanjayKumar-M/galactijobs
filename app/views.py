@@ -42,7 +42,7 @@ def RegisterUser(req):
         else:
             otp = randint(100000,999999)
             
-            newUser = Users.objects.create(role=role,otp=otp,password=password)
+            newUser = Users.objects.create(role=role,otp=otp,password=password,email=email)
             newCompany = Company.objects.create(user_id=newUser,company_name = company_name)
             return render(req,"app/otp.html",{'email':email})
         
@@ -100,7 +100,7 @@ def loginUser(req):
                     req.session['role'] = company.role
                     req.session['name'] = comp.name
                     
-                    return redirect('index')
+                    return redirect('company')
                 else:
                       return render(req, "app/login.html", {'msg': "Wrong Password"})
             except Users.DoesNotExist:
@@ -135,4 +135,28 @@ def updateProfile(req, pk):
         can.profile = req.POST.get('profile')
         can.save()
         return redirect('profile',pk=pk)
-    return redirect('profile', pk=pk)   
+    return redirect('profile',pk=pk)
+
+####################### COMPANY SIDE #############################
+
+def companyIndex(req):
+    return render(req,"app/company/index.html")
+
+def companyProfile(req,pk):
+     user = Users.objects.get(pk=pk)
+     company = Company.objects.get(user_id=user)
+     return render(req,"app/company/profile.html",{'user':user,'company':company})
+ 
+def updateCompanyProfile(req,pk):
+        user = get_object_or_404(Users, pk=pk)
+        if user.role == "Company":
+            company = Company.objects.get(user_id=user)
+            company.name = req.POST.get('name')
+            company.company_name = req.POST.get('company_name')
+            company.city = req.POST.get('city')
+            company.contact = req.POST.get('contact')
+            company.address  = req.POST.get('address')
+            company.state = req.POST.get('state')
+            company.logo = req.POST.get('logo')
+            company.save()
+            return redirect('company-profile', pk=pk)   

@@ -8,6 +8,11 @@ urlpatterns = [
     path('verify-otp/', views.verifyOTP, name="verify-otp"),
     path('login/', views.loginUser, name="login"),
     path('profile/<int:pk>/',views.profile,name="profile"),
-    path('updateprofile/<int:pk>/',views.updateProfile,name="updateprofile")
+    path('updateprofile/<int:pk>/',views.updateProfile,name="updateprofile"),
+    
+    
+    path('company/',views.companyIndex,name="company"),
+    path('company-profile/<int:pk>',views.companyProfile,name="company-profile"),
+    path('updatecompanyprofile/<int:pk>/',views.updateCompanyProfile,name="updatecompanyprofile")
     
 ]
