@@ -15,6 +15,10 @@ urlpatterns = [
     path('company-profile/<int:pk>',views.companyProfile,name="company-profile"),
     path('updatecompanyprofile/<int:pk>/',views.updateCompanyProfile,name="updatecompanyprofile"),
     path('jobpost/',views.jobpost,name="jobpostpage"),
-    path('jobdetailpost/',views.jobDetailsPost,name="jobpost")
+    path('jobdetailpost/',views.jobDetailsPost,name="jobpost"),
+    path('jobpostlist/',views.jobpostlist,name="jobpostlist"),
+    
+    path('joblist/',views.candidatejobpostlist,name="joblist"),
+    path('companylogout/',views.companylogout,name="companylogout")
     
 ]

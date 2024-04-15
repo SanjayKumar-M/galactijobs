@@ -201,5 +201,18 @@ def jobDetailsPost(req):
                 logo=logo
             )
             return render(req, "app/company/jobpost.html", {'msg': "Job posted successfully!"})
-    # Handle cases where session ID is not found or user role is not "Company"
-    return HttpResponse("Unauthorized", status=401)  # Or redirect to a login page
+   
+
+
+def jobpostlist(req):
+    alljob = JobDetail.objects.all()
+    return render(req,"app/company/jobpostlist.html",{'alljob':alljob})
+
+def candidatejobpostlist(req):
+    alljob = JobDetail.objects.all()
+    return render(req,"app/job-list.html",{'alljob':alljob})
+
+def companylogout(req):
+    del req.session['email']
+    del req.session['password']
+    return redirect('index')

@@ -33,7 +33,7 @@
                     <li><a class="dropdown-item" href="{% url 'company-profile' pk=request.session.id %}">Profile</a></li>
                     <li><a class="dropdown-item" href="#!">Activity Log</a></li>
                     <li><hr class="dropdown-divider" /></li>
-                    <li><a class="dropdown-item" href="#!">Logout</a></li>
+                    <li><a class="dropdown-item" href="{% url 'companylogout' %}">Logout</a></li>
                 </ul>
             </li>
         </ul>
@@ -95,7 +95,7 @@
                 </div>
                 <div class="sb-sidenav-footer">
                     <div class="small">Logged in as:</div>
-                    Start Bootstrap
+                    Galactic Jobs
                 </div>
             </nav>
         </div>
@@ -107,7 +107,7 @@
         <footer class="py-4 bg-light mt-auto">
             <div class="container-fluid px-4">
                 <div class="d-flex align-items-center justify-content-between small">
-                    <div class="text-muted">Copyright &copy; Your Website 2023</div>
+                    <div class="text-muted">Copyright &copy; Galactic Jobs</div>
                     <div>
                         <a href="#">Privacy Policy</a>
                         &middot;
