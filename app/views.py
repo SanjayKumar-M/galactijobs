@@ -268,7 +268,12 @@ def candidatejobpostlist(req):
     alljob = JobDetail.objects.all()
     return render(req,"app/job-list.html",{'alljob':alljob})
 
+def jobapplylist(req):
+    all_jobapply =  ApplyList.objects.all()
+    return render(req,"app/company/applyjoblist.html",{'all_job':all_jobapply})
+
 def companylogout(req):
     del req.session['email']
     del req.session['password']
     return redirect('index')
+

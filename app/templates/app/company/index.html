@@ -67,11 +67,11 @@
                             </div>
                         </div>
                         <div class="card mb-4">
-                            <div class="card-header">
+                            <!-- <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
                                 DataTable Example
-                            </div>
-                            <div class="card-body">
+                            </div> -->
+                            <!-- <div class="card-body">
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
@@ -83,23 +83,22 @@
                                             <th>Salary</th>
                                         </tr>
                                     </thead>
-                                    {% if alljob %}
+                                    {% if all_job %}
                                     <tbody>
-                                        {% for i in alljob %}
+                                        {% for apply in all_job %}
                                         <tr>
-                                            
-                                            <td>{{i.jobname}}</td>
-                                            <td>{{i.companyname}}</td>
-                                            <td>{{i.location}}</td>
-                                            <td>{{i.companywebsite}}</td>
-                                            <td>{{i.experience}}</td>
-                                            <td>{{i.salary}}</td>
-                                        </tr>
+                                            <td>{{apply.job.jobname}}</td> 
+                                            <td>{{ apply.candidate.name }}</td>
+                                            <td>{{ apply.job.location }}</td>
+                                            <td>{{ apply.job.companywebsite }}</td>
+                                            <td>{{ apply.experience }}</td>
+                                            <td>{{ apply.salary }}</td>
+                                        </tr> 
                                         {% endfor %}
                                     </tbody>
                                     {% endif %}
                                 </table>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </main>

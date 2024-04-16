@@ -21,6 +21,7 @@ urlpatterns = [
     
     path('joblist/',views.candidatejobpostlist,name="joblist"),
     path('companylogout/',views.companylogout,name="companylogout"),
+    path('applyjoblist/',views.jobapplylist,name="applyjoblist")
     
         
     
