@@ -111,3 +111,47 @@ Galactijobs is a powerful job portal application built using Django. This API do
   "resume": "https://example.com/resume.pdf"
 }
 ```
+
+### Job Posting
+
+#### Create Job Post
+
+- **Endpoint**: `/jobpost/`
+- **Method**: POST
+
+**Request Body**:
+```json
+{
+  "job_title": "Software Engineer",
+  "job_description": "We are looking for a talented software engineer to join our team.",
+  "job_location": "San Francisco, CA",
+  "job_type": "Full-time",
+  "salary_range": "80,000 - 120,000 USD",
+  "company": 1
+}
+```
+
+### Get Job Post List
+
+- **Endpoint**: `/jobpostlist/`
+- **Method**: GET
+
+### Get Job Details
+
+- **Endpoint**: `/jobdetailpost/int:pk`
+- **Method**: GET
+
+### Job Application
+
+#### Apply for a Job
+
+- **Endpoint**: `/apply/int:pk`
+- **Method**: POST
+
+**Request Body**:
+```json
+{
+  "cover_letter": "I am excited to apply for this position and would be a great fit for the team.",
+  "resume": "https://example.com/resume.pdf"
+}
+```
