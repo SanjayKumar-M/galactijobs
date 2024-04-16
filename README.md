@@ -23,3 +23,90 @@ Galactijobs is a powerful job portal application built using Django. This API do
   - [Update Company Profile](#update-company-profile)
   - [Get Applicants List](#get-applicants-list)
 
+## Authentication
+
+### User Registration
+
+- **Endpoint**: /signup/
+- **Method**: POST
+
+**Request Body**:
+```json
+{
+  "username": "johndoe",
+  "email": "johndoe@example.com",
+  "password": "password123"
+}
+```
+### User Login
+
+- **Endpoint**: `/login/`
+- **Method**: POST
+
+**Request Body**:
+```json
+{
+  "username": "johndoe",
+  "password": "password123"
+}```
+
+### Company Registration
+
+- **Endpoint**: `/company/`
+- **Method**: POST
+
+**Request Body**:
+```json
+{
+  "company_name": "Acme Inc.",
+  "email": "hr@acme.com",
+  "password": "company123"
+}
+```
+
+### Company Login
+
+- **Endpoint**: `/company/login/`
+- **Method**: POST
+
+**Request Body**:
+```json
+{
+  "email": "hr@acme.com",
+  "password": "company123"
+}
+```
+
+### User Profile
+
+#### Get User Profile
+
+- **Endpoint**: `/profile/int:pk/`
+- **Method**: GET
+
+**Response**:
+```json
+{
+  "id": 1,
+  "username": "johndoe",
+  "email": "johndoe@example.com",
+  "first_name": "John",
+  "last_name": "Doe",
+  "phone_number": "1234567890",
+  "resume": "https://example.com/resume.pdf"
+}
+```
+### Update User Profile
+
+- **Endpoint**: `/updateprofile/int:pk/`
+- **Method**: PUT
+
+**Request Body**:
+```json
+{
+  "first_name": "John",
+  "last_name": "Doe",
+  "phone_number": "1234567890",
+  "resume": "https://example.com/resume.pdf"
+}
+```
