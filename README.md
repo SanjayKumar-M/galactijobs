@@ -48,7 +48,8 @@ Galactijobs is a powerful job portal application built using Django. This API do
 {
   "username": "johndoe",
   "password": "password123"
-}```
+}
+```
 
 ### Company Registration
 
