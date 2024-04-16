@@ -137,6 +137,62 @@ def updateProfile(req, pk):
         return redirect('profile',pk=pk)
     return redirect('profile',pk=pk)
 
+def apply(req,pk):
+    user = req.session['id']
+    if user:
+        cand = Candidate.objects.get(user_id = user)
+        job = JobDetail.objects.get(id=pk)
+    return render(req,"app/apply.html",{'user':user,'candidate':cand,'job':job})
+
+def Applyjob(req, pk):
+    user = req.session['id']
+    if user:
+        cand = Candidate.objects.get(user_id=user)
+        job = JobDetail.objects.get(id=pk)
+
+        if req.method == 'POST':
+            name = req.POST['name']
+            email = req.POST['email']
+            contact = req.POST['contact']
+            city = req.POST['city']
+            state = req.POST['state']
+            education = req.POST['education']
+            experience = req.POST['experience']
+            website = req.POST['website']
+            gender = req.POST['gender']
+            salary = req.POST['salary']
+            resume = req.FILES['resume']
+
+            # Update the candidate's profile information
+            cand.name = name
+            cand.email = email
+            cand.contact = contact
+            cand.city = city
+            cand.state = state
+            cand.education = education
+            cand.experience = experience
+            cand.website = website
+            cand.gender = gender
+            cand.salary = salary
+            cand.save()
+
+            # Create the application
+            newapply = ApplyList.objects.create(
+                candidate=cand,
+                job=job,
+                education=education,
+                experience=experience,
+                website=website,
+                gender=gender,
+                resume=resume,
+                salary=salary
+            )
+
+            return render(req, "app/apply.html", {'msg': "Job applied successfully", 'candidate': cand, 'job': job})
+
+    return render(req, "app/apply.html", {'candidate': cand, 'job': job})
+    
+
 ####################### COMPANY SIDE #############################
 
 def companyIndex(req):
